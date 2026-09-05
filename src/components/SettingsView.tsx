@@ -28,6 +28,7 @@ import {
   checkTelegramBotStatus,
 } from '../lib/googleServices';
 import { formatMorningNotification, STANDARD_PAIRS, LUNCH_BREAK } from '../lib/scheduleEngine';
+import { playNotificationSound } from '../lib/notificationSound';
 
 interface SettingsViewProps {
   onOpenWeekSettingsModal: () => void;
@@ -744,8 +745,7 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
           </div>
           <div className="flex items-center gap-2">
             <button
-              onClick={async () => {
-                const { playNotificationSound } = await import('../lib/notificationSound');
+              onClick={() => {
                 playNotificationSound();
               }}
               className="text-[11px] font-medium text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 underline cursor-pointer"

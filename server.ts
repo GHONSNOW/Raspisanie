@@ -334,7 +334,7 @@ setInterval(checkAndSendDailyNotifications, 30000);
 
 async function startServer() {
   const app = express();
-  const PORT = 3000;
+  const PORT = Number(process.env.PORT) || 3000;
 
   app.use(express.json({ limit: '10mb' }));
 
@@ -526,8 +526,12 @@ async function startServer() {
     }
   });
 
-  // Vite middleware for development
-  if (process.env.NODE_ENV !== 'production') {
+  // Vite middleware for development vs static files for production
+  const isProduction =
+    process.env.NODE_ENV === 'production' ||
+    (typeof __filename !== 'undefined' && __filename.endsWith('.cjs'));
+
+  if (!isProduction) {
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: 'spa',

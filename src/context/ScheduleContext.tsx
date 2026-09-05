@@ -18,7 +18,7 @@ import {
   DEFAULT_TEACHERS,
   DEFAULT_WEEK_SETTINGS,
 } from '../data/mockDefaultData';
-import { auth, db, sanitizeForFirestore } from '../lib/firebase';
+import { auth, db, googleProvider, sanitizeForFirestore } from '../lib/firebase';
 import {
   onAuthStateChanged,
   signInWithPopup,
@@ -1493,7 +1493,6 @@ export const ScheduleProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   const loginWithGoogle = async () => {
-    const { googleProvider } = await import('../lib/firebase');
     await signInWithPopup(auth, googleProvider);
   };
 
