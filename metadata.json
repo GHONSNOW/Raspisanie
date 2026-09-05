@@ -1,0 +1,6 @@
+{
+  "name": "Расписание пар",
+  "description": "Современное приложение для управления учебным расписанием, расписанием друзей, разными циклами недель и утренними уведомлениями",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

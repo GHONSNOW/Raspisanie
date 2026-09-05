@@ -1,0 +1,44 @@
+{
+  "entities": {
+    "UserSchedule": {
+      "title": "UserSchedule",
+      "description": "User personal schedule data and settings",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Owner user ID" },
+        "email": { "type": "string", "description": "User email address" },
+        "displayName": { "type": "string", "description": "Display name of the student" },
+        "updatedAt": { "type": "string", "description": "Last update ISO timestamp" },
+        "shareCode": { "type": "string", "description": "Short code for sharing schedule with friends" }
+      },
+      "required": ["userId"]
+    },
+    "PublicSchedule": {
+      "title": "PublicSchedule",
+      "description": "Shared schedule for friends and cross-device synchronization by share code",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Author user ID or device ID" },
+        "displayName": { "type": "string", "description": "Author or student name" },
+        "group": { "type": "string", "description": "Academic group name" },
+        "shareCode": { "type": "string", "description": "Unique share code" },
+        "lessons": { "type": "array", "description": "List of lessons" },
+        "teachers": { "type": "array", "description": "Directory of teachers" },
+        "classrooms": { "type": "array", "description": "Directory of classrooms" },
+        "weekSettings": { "type": "object", "description": "Week cycling configuration" },
+        "updatedAt": { "type": "string", "description": "Update timestamp" }
+      },
+      "required": ["shareCode"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserSchedule",
+      "description": "Private user profile and schedule storage"
+    },
+    "/publicSchedules/{shareCode}": {
+      "schema": "PublicSchedule",
+      "description": "Public shared schedules by share code"
+    }
+  }
+}
